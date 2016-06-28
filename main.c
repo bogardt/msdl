@@ -1,6 +1,6 @@
 # include	"msdl.h"
 
-void		event_listener(t_event *this, __attribute__((unused))t_data *data)
+void		mevent_listener(t_event *this, __attribute__((unused))t_data *data)
 {
   if (key == SDLK_UP)
     printf("KEYUP\n");
@@ -12,15 +12,14 @@ void		event_listener(t_event *this, __attribute__((unused))t_data *data)
     printf("KEYRIGHT\n");
 }
 
-
-void		game_loop(t_data	*data,
+void		msdl_loop(t_data	*data,
 			  SDL_Surface	*back,
 			  SDL_Surface	*screen)
 {
   t_event	*this = malloc(sizeof(t_event));
-  while (data->run)
+
+  while ((data->run = msdl_event(this, data, mevent_listener)))
     {
-      data->run = msdl_event(this, data, event_listener);
       msdl_blit(back, NULL, screen, NULL);
       msdl_update(screen);
     }
@@ -34,7 +33,7 @@ int		main()
 
   msdl_init_var(&data);
   screen = msdl_init_data("rpg-game", 1200, 800, 32, &data);
-  back = msdl_create_back(1200, 800, 32);
-  game_loop(&data, back, screen);
+  back = msdl_create_back_data(&data);
+  msdl_loop(&data, back, screen);
   return (0);
 }

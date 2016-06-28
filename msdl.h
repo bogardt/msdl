@@ -15,16 +15,6 @@
 # define	FAILURE		0
 # define	key		this->event.key.keysym.sym
 
-typedef	enum	s_key
-  {
-    KUP,
-    KDOWN,
-    KLEFT,
-    KRIGHT,
-    KA,
-    KB
-  }		e_key;
-
 typedef struct	s_node
 {
   struct s_node	*next;
@@ -47,6 +37,9 @@ typedef struct	s_data
 {
   bool		run;
   bool		isinit;
+  int		width;
+  int		height;
+  int		bpp;
 }		t_data;
 
 /*
@@ -63,9 +56,10 @@ SDL_Surface			*msdl_init(const char * const		Windowname,
 					   const unsigned int		Height,
 					   const unsigned int		Bpp);
 
-SDL_Surface			*msdl_create_back(const unsigned int	Width,
-						  const unsigned int	Height,
-						  const unsigned int	Bpp);
+SDL_Surface			*msdl_create_back(const unsigned int		Width,
+						  const unsigned int		Height,
+						  const unsigned int		Bpp);
+SDL_Surface			*msdl_create_back_data(t_data		*data);
 
 void				msdl_init_var(t_data			*data);
 

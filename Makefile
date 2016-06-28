@@ -10,8 +10,8 @@ CC	=	gcc
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	+=	-Wall -Wextra #-Werror
-# CFLAGS	+=	-ansi -pedantic
+CFLAGS	+=	-Wall -Wextra -Werror
+CFLAGS	+=	-ansi -pedantic
 CFLAGS	+=	-O0 -g3
 CFLAGS	+=	-I./include
 CFLAGS	+=	-std=gnu99

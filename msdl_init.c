@@ -51,7 +51,23 @@ SDL_Surface		*msdl_init_data(const char * const	Windowname,
     }
   data->run = true;
   data->isinit = true;
+  data->width = Width;
+  data->height = Height;
+  data->bpp = Bpp;
   return (screen);
+}
+
+SDL_Surface		*msdl_create_back_data(t_data *data)
+{
+  SDL_Surface		*back;
+
+  if (!(back =
+	SDL_AllocSurface(SDL_HWSURFACE, data->width, data->height, data->bpp, 0, 0, 0, 0)))
+    {
+      fprintf(stderr, "->msdl alloc background error\n");
+      return (NULL);
+    }
+  return (back);
 }
 
 SDL_Surface		*msdl_create_back(const unsigned int Width,
