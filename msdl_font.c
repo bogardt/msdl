@@ -14,7 +14,7 @@ TTF_Font		*msdl_load_font(const char		*file,
 
   if (!(font = TTF_OpenFont(file, size)))
     {
-      fprintf(stderr, "->msdl font failure %s is not a good path\n", file);
+      fprintf(stderr, "->msdl font failure [%s] is not a good path\n", file);
       return (NULL);
     }
   return (font);
@@ -32,7 +32,6 @@ void			msdl_write_hexa_color(SDL_Surface	**surface,
   colorized_text.r = rgb[0];
   colorized_text.g = rgb[1];
   colorized_text.b = rgb[2];
-  SDL_FreeSurface(*surface);
   *surface = TTF_RenderText_Solid(font, str, colorized_text);
   TTF_CloseFont(font);
 }
@@ -47,7 +46,6 @@ void			msdl_write_rgb_color(SDL_Surface	**surface,
   colorized_text.r = rgb[0];
   colorized_text.g = rgb[1];
   colorized_text.b = rgb[2];
-  SDL_FreeSurface(*surface);
   *surface = TTF_RenderText_Solid(font, str, colorized_text);
   TTF_CloseFont(font);
 }

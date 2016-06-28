@@ -19,6 +19,11 @@ SDL_Surface		*msdl_init(const char * const	Windowname,
       fprintf(stderr, "->msdl init error\n");
       return (NULL);
     }
+  if (TTF_Init() == -1)
+    {
+      fprintf(stderr, "->msdl font init error\n");
+      return (NULL);
+    }
   SDL_WM_SetCaption(Windowname, NULL);
   if (!(screen =
 	SDL_SetVideoMode(Width, Height, Bpp, SDL_DOUBLEBUF | SDL_HWSURFACE)))
@@ -29,11 +34,11 @@ SDL_Surface		*msdl_init(const char * const	Windowname,
   return (screen);
 }
 
-SDL_Surface		*msdl_init_data(const char * const	Windowname,
+SDL_Surface		*msdl_init_msdl(const char * const	Windowname,
 					const unsigned int	Width,
 					const unsigned int	Height,
 					const unsigned int	Bpp,
-					t_data *data)
+					t_msdl			*msdl)
 {
   SDL_Surface		*screen;
 
@@ -42,6 +47,11 @@ SDL_Surface		*msdl_init_data(const char * const	Windowname,
       fprintf(stderr, "->msdl init error\n");
       return (NULL);
     }
+  if (TTF_Init() == -1)
+    {
+      fprintf(stderr, "->msdl font init error\n");
+      return (NULL);
+    }
   SDL_WM_SetCaption(Windowname, NULL);
   if (!(screen =
 	SDL_SetVideoMode(Width, Height, Bpp, SDL_DOUBLEBUF | SDL_HWSURFACE)))
@@ -49,20 +59,20 @@ SDL_Surface		*msdl_init_data(const char * const	Windowname,
       fprintf(stderr, "->msdl init screen error\n");
       return (NULL);
     }
-  data->run = true;
-  data->isinit = true;
-  data->width = Width;
-  data->height = Height;
-  data->bpp = Bpp;
+  msdl->run = true;
+  msdl->isinit = true;
+  msdl->width = Width;
+  msdl->height = Height;
+  msdl->bpp = Bpp;
   return (screen);
 }
 
-SDL_Surface		*msdl_create_back_data(t_data *data)
+SDL_Surface		*msdl_create_back_msdl(t_msdl *msdl)
 {
   SDL_Surface		*back;
 
   if (!(back =
-	SDL_AllocSurface(SDL_HWSURFACE, data->width, data->height, data->bpp, 0, 0, 0, 0)))
+	SDL_AllocSurface(SDL_HWSURFACE, msdl->width, msdl->height, msdl->bpp, 0, 0, 0, 0)))
     {
       fprintf(stderr, "->msdl alloc background error\n");
       return (NULL);
@@ -85,8 +95,9 @@ SDL_Surface		*msdl_create_back(const unsigned int Width,
   return (back);
 }
 
-void			msdl_init_var(t_data *data)
+void			msdl_init_var(t_msdl *msdl)
 {
-  data->isinit = false;
-  data->run = false;
+  msdl->isinit = false;
+  msdl->run = false;
+  msdl->nb_node = 0;
 }
