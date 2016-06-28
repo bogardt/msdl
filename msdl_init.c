@@ -16,14 +16,14 @@ SDL_Surface		*msdl_init(const char * const	Windowname,
 
   if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
-      fprintf(stderr, "->msdl init failure\n");
+      fprintf(stderr, "->msdl init error\n");
       return (NULL);
     }
   SDL_WM_SetCaption(Windowname, NULL);
   if (!(screen =
 	SDL_SetVideoMode(Width, Height, Bpp, SDL_DOUBLEBUF | SDL_HWSURFACE)))
     {
-      fprintf(stderr, "->msdl init screen failure\n");
+      fprintf(stderr, "->msdl init screen error\n");
       return (NULL);
     }
   return (screen);
@@ -39,18 +39,18 @@ SDL_Surface		*msdl_init_data(const char * const	Windowname,
 
   if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
-      fprintf(stderr, "->msdl init failure\n");
+      fprintf(stderr, "->msdl init error\n");
       return (NULL);
     }
   SDL_WM_SetCaption(Windowname, NULL);
   if (!(screen =
 	SDL_SetVideoMode(Width, Height, Bpp, SDL_DOUBLEBUF | SDL_HWSURFACE)))
     {
-      fprintf(stderr, "->msdl init screen failure\n");
+      fprintf(stderr, "->msdl init screen error\n");
       return (NULL);
     }
-  data->run = 1;
-  data->isinit = 1;
+  data->run = true;
+  data->isinit = true;
   return (screen);
 }
 
@@ -63,22 +63,14 @@ SDL_Surface		*msdl_create_back(const unsigned int Width,
   if (!(back =
 	SDL_AllocSurface(SDL_HWSURFACE, Width, Height, Bpp, 0, 0, 0, 0)))
     {
-      fprintf(stderr, "->msdl alloc background failure\n");
+      fprintf(stderr, "->msdl alloc background error\n");
       return (NULL);
     }
   return (back);
 }
 
-t_data			*msdl_init_var(void)
+void			msdl_init_var(t_data *data)
 {
-  t_data		*data;
-
-  if (!(data = malloc(sizeof(*data))))
-    {
-      fprintf(stderr, "->msdl init var malloc failure\n");
-      return (NULL);
-    }
-  data->isinit = 0;
-  data->run = 0;
-  return (data);
+  data->isinit = false;
+  data->run = false;
 }
