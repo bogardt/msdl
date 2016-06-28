@@ -3,7 +3,9 @@
 ** by bogard_t
 */
 
-void		msdl_rect(SDL_Rect		*rest,
+# include	"msdl.h"
+
+void		msdl_rect(SDL_Rect		*rect,
 			  const int		x,
 			  const int		y,
 			  const int		w,

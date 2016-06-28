@@ -5,10 +5,10 @@
 
 # include		"msdl.h"
 
-void			sdl_blit(SDL_Surface		*sprite,
-				 SDL_Rect		*rect1,
-				 SDL_Surface		*level,
-				 SDL_Rect		*rect2)
+void			msdl_blit(SDL_Surface		*surface,
+				  SDL_Rect		*rect1,
+				  SDL_Surface		*level,
+				  SDL_Rect		*rect2)
 {
-  SDL_BlitSurface(sprite, rect1, level, rect2);
+  SDL_BlitSurface(surface, rect1, level, rect2);
 }
