@@ -90,7 +90,7 @@ void				msdl_close(void);
 
 void				msdl_update(SDL_Surface		*screen);
 
-void				msdl_sleep(const unsigned int time);
+void				msdl_sleep(const unsigned int	time);
 
 /*
 ** msdl_sprite_list.c
