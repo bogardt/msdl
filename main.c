@@ -25,12 +25,15 @@ static void	msdl_loop(t_msdl	*msdl,
       msdl_blit(back, NULL, screen, NULL);
 
       msdl_rect(&font->rect, 10, 10, 0, 0);
-      font->load_font = msdl_load_font("Mario.ttf", 200);
+      font->load_font = msdl_load_font("Mario.ttf", 100);
       msdl_write_hexa_color(&font->blit_font, font->load_font, "TEST", 0xffffff);
       msdl_blit(font->blit_font, NULL, screen, &font->rect);
 
       msdl_update(screen);
     }
+  SDL_FreeSurface(screen);
+  SDL_FreeSurface(back);
+  SDL_FreeSurface(font->blit_font);
 }
 
 int		main()
@@ -40,8 +43,8 @@ int		main()
   SDL_Surface	*back;
 
   msdl_init_var(&msdl);
-  screen = msdl_init_msdl("rpg-game", 1200, 800, 32, &msdl);
-  back = msdl_create_back_msdl(&msdl);
+  screen = msdl_init_data("rpg-game", 1200, 800, 32, &msdl);
+  back = msdl_create_back_data(&msdl);
   msdl_loop(&msdl, back, screen);
   msdl_close();
   return (0);

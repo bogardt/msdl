@@ -32,6 +32,7 @@ void			msdl_write_hexa_color(SDL_Surface	**surface,
   colorized_text.r = rgb[0];
   colorized_text.g = rgb[1];
   colorized_text.b = rgb[2];
+  free(rgb);
   *surface = TTF_RenderText_Solid(font, str, colorized_text);
   TTF_CloseFont(font);
 }

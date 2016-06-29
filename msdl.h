@@ -9,7 +9,6 @@
 # include	<SDL/SDL.h>
 # include	<SDL/SDL_ttf.h>
 # include	<SDL/SDL_image.h>
-# include	<stdbool.h>
 
 # define	SUCCESS		1
 # define	FAILURE		0
@@ -37,8 +36,8 @@ typedef	struct	s_font
 typedef struct	s_msdl
 {
   struct s_node	*first;
-  bool		run;
-  bool		isinit;
+  char		run;
+  char		isinit;
   int		width;
   int		height;
   int		bpp;
@@ -48,7 +47,7 @@ typedef struct	s_msdl
 /*
 ** msdl_init.c
 */
-SDL_Surface			*msdl_init_msdl(const char * const	Windowname,
+SDL_Surface			*msdl_init_data(const char * const	Windowname,
 						const unsigned int	Width,
 						const unsigned int	Height,
 						const unsigned int	Bpp,
@@ -63,7 +62,7 @@ SDL_Surface			*msdl_create_back(const unsigned int	Width,
 						  const unsigned int	Height,
 						  const unsigned int	Bpp);
 
-SDL_Surface			*msdl_create_back_msdl(t_msdl		*msdl);
+SDL_Surface			*msdl_create_back_data(t_msdl		*msdl);
 
 void				msdl_init_var(t_msdl			*msdl);
 
@@ -118,9 +117,13 @@ void				msdl_blit(SDL_Surface		*surface,
 /*
 ** msdl_event.c
 */
-bool				msdl_event(t_event		*this,
+char				msdl_event(t_event		*this,
 					   t_msdl		*msdl,
 					   void			(*ptr)(t_event *, t_msdl *));
 
+/*
+** msdl_map.c
+*/
+char				**msdl_map(const char		*str);
 
 #endif		/* __MSDL_H__ */
