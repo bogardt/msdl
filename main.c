@@ -25,8 +25,8 @@ static void	msdl_loop(t_msdl	*msdl,
       msdl_blit(back, NULL, screen, NULL);
 
       msdl_rect(&font->rect, 10, 10, 0, 0);
-      font->load_font = msdl_load_font("Mario.ttf", 100);
-      msdl_write_hexa_color(&font->blit_font, font->load_font, "TEST", 0xffffff);
+      font->load_font = msdl_load_font("test-font.ttf", 100);
+      msdl_write_hexa_color(&font->blit_font, font->load_font, "TESTa", 0xffffff);
       msdl_blit(font->blit_font, NULL, screen, &font->rect);
 
       msdl_update(screen);
