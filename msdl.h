@@ -124,4 +124,9 @@ char				msdl_event(t_event		*this,
 */
 char				**msdl_map(const char		*str);
 
+/*
+** utils.c
+*/
+int					getRandomIntBetween(int min, int max);
+
 #endif		/* __MSDL_H__ */

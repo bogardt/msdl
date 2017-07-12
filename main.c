@@ -38,7 +38,7 @@ static void	msdl_loop(t_msdl	*msdl,
       // sprites
       for (t_node *tmp = msdl->first; tmp->next; tmp = tmp->next)
       {
-        msdl_rect(&tmp->rect, 400, 400, 0, 0);
+        msdl_rect(&tmp->rect, getRandomIntBetween(100, 400), getRandomIntBetween(100, 400), 0, 0);
         msdl_blit(tmp->surface, NULL, screen, &tmp->rect);
       }
 
