@@ -19,6 +19,8 @@ typedef struct	s_node
   struct s_node	*next;
   struct s_node	*prev;
   SDL_Surface	*surface;
+  SDL_Rect		rect;
+  char			*filePath;
 }		t_node;
 
 typedef struct	s_event
@@ -94,11 +96,7 @@ void				msdl_sleep(const unsigned int	time);
 /*
 ** msdl_sprite_list.c
 */
-void				msdl_init_list(t_msdl		*sdl,
-					       SDL_Surface	*surface);
-
-void				msdl_add_list(t_msdl		*sdl,
-					      SDL_Surface	*surface);
+void				msdl_add_list(t_msdl		*sdl, const char	*filePath);
 
 void				msdl_rect(SDL_Rect		*rect,
 					  const int		x,

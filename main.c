@@ -20,23 +20,39 @@ static void	msdl_loop(t_msdl	*msdl,
   t_event	*this = malloc(sizeof(t_event));
   t_font	*font = malloc(sizeof(t_font));;
 
+  msdl_add_list(msdl, "google.png");
+  msdl_add_list(msdl, "google.png");
+  msdl_add_list(msdl, "google.png");
+  msdl_add_list(msdl, "google.png");
   while ((msdl->run = msdl_event(this, msdl, mevent_listener)))
     {
+      // background
       msdl_blit(back, NULL, screen, NULL);
 
-      msdl_rect(&font->rect, 10, 10, 0, 0);
+      // font
       font->load_font = msdl_load_font("test-font.ttf", 100);
-      msdl_write_hexa_color(&font->blit_font, font->load_font, "TESTa", 0xffffff);
+      msdl_rect(&font->rect, 400, 400, 0, 0);
+      msdl_write_hexa_color(&font->blit_font, font->load_font, "42", 0xffffff);
       msdl_blit(font->blit_font, NULL, screen, &font->rect);
 
+      // sprites
+      for (t_node *tmp = msdl->first; tmp->next; tmp = tmp->next)
+      {
+        msdl_rect(&tmp->rect, 400, 400, 0, 0);
+        msdl_blit(tmp->surface, NULL, screen, &tmp->rect);
+      }
+
+      // update screen
       msdl_update(screen);
     }
+
   SDL_FreeSurface(screen);
   SDL_FreeSurface(back);
   SDL_FreeSurface(font->blit_font);
 }
 
-int		main()
+int		main(__attribute__((unused))int ac,
+           __attribute__((unused)) const char *av[])
 {
   t_msdl	msdl;
   SDL_Surface	*screen;

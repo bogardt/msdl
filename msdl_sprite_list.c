@@ -1,41 +1,39 @@
 /*
-** msdl_sprite_list.c
+** msdl_surface.c
 ** by bogard_t
 */
 
-# include	"msdl.h"
+#include "msdl.h"
 
-/* void		msdl_init_list(t_msdl		*sdl, */
-/* 			       SDL_Surface	*surface) */
-/* { */
-/*   t_node	*new; */
+static void msdl_init_list(t_msdl *sdl, const char *filePath)
+{
+    t_node *new;
 
-/*   new = malloc(sizeof(*new)); */
-/*   new->surface = malloc(sizeof(SDL_Surface)); */
-/*   new->next = NULL; */
-/*   new->prev = NULL; */
-/*   sdl->first = new; */
-/*   sdl->nb_node++; */
-/* } */
+    new = malloc(sizeof(*new));
+    new->surface = IMG_Load(filePath);
+    new->next = NULL;
+    new->prev = NULL;
+    sdl->first = new;
+    new->filePath = strdup(filePath);
+    sdl->nb_node++;
+}
 
-/* void		msdl_add_list(t_msdl		*sdl, */
-/* 			      SDL_Surface	*surface) */
-/* { */
-/*   t_node	*new; */
-/*   t_node	*current; */
+void msdl_add_list(t_msdl *sdl, const char *filePath)
+{
+    t_node *new;
+    t_node *current;
 
-/*   if (sdl->nb_node == 0) */
-/*     msdl_init_list(sdl, surface); */
-/*   else */
-/*     { */
-/*       new = malloc(sizeof(*new)); */
-/*       new->surface = malloc(sizeof(SDL_Surface)); */
-/*       current = current->first; */
-/*       while (current->next) */
-/* 	current = current->next; */
-/*       new->next = NULL; */
-/*       new->prev = current; */
-/*       current->next = new; */
-/*       sdl->nb_node++; */
-/*    } */
-/* } */
+    if (sdl->nb_node == 0)
+        msdl_init_list(sdl, filePath);
+    else
+    {
+        new = malloc(sizeof(*new));
+        new->surface = IMG_Load(filePath);
+        for (current = sdl->first; current->next; current = current->next);
+        new->next = NULL;
+        new->prev = current;
+        current->next = new;
+        new->filePath = strdup(filePath);
+        sdl->nb_node++;
+    }
+}
